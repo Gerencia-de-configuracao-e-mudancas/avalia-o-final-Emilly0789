@@ -1,0 +1,120 @@
+/* styles.css — estilos base para "Meus Filmes Favoritos" */
+:root{
+  --bg: #f5f5f5;
+  --card: #ffffff;
+  --accent: #e50914;
+  --text: #222222;
+  --muted: #6b6b6b;
+  --radius: 10px;
+  --max-width: 900px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Garamond", Georgia, serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{
+  max-width:var(--max-width);
+  margin:48px auto;
+  padding:0 20px 48px;
+}
+
+h1{color:var(--accent);font-size:2rem;margin:0 0 .25rem}
+h2{color:var(--accent);font-size:1.25rem;margin-top:2rem}
+
+p{line-height:1.5;margin:.4rem 0}
+
+.filme{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  transition:transform .18s ease,box-shadow .18s ease;
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+.filme:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.filme h3{margin:.1rem 0 .5rem}
+.filme p strong{color:var(--accent)}
+
+.poster-wrap{position:relative;flex:0 0 140px}
+.poster{
+  width:140px;
+  height:200px;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+.filme-body{flex:1}
+
+/* Hide meta and synopsis until poster is clicked */
+.meta,
+.synopsis{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition: max-height .28s ease, opacity .2s ease;
+}
+.synopsis h4{margin:.25rem 0 .35rem;color:var(--accent);font-size:1rem}
+.filme.expanded .meta,
+.filme.expanded .synopsis{
+  max-height:800px;
+  opacity:1;
+}
+
+.poster{cursor:pointer}
+.poster:focus{outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent);outline-offset:3px}
+.review{margin-top:.6rem}
+
+/* Overlay shown on hover to indicate interactivity */
+.overlay{
+  position:absolute;inset:0;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.45) 100%);
+  color:#fff;font-weight:600;opacity:0;transition:opacity .18s ease,transform .18s ease;transform:translateY(6px);
+}
+.poster-wrap:hover .overlay,.poster:focus + .overlay,.filme.expanded .overlay{opacity:1;transform:translateY(0)}
+.overlay-label{padding:6px 10px;background:rgba(0,0,0,0.35);border-radius:6px}
+
+/* Toggle button */
+.toggle-btn{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 10px;border-radius:6px;font-size:.85rem;margin-left:10px;cursor:pointer}
+.toggle-btn[aria-expanded="true"]{background:var(--accent);color:#fff}
+
+/* Ensure poster-wrap and overlay adapt on small screens */
+@media (max-width:600px){
+  .poster-wrap{flex:0 0 auto}
+  .poster{width:160px;height:230px}
+}
+
+footer{margin-top:28px;font-size:.95rem;color:var(--muted);text-align:center}
+
+/* Utilities */
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.badge{display:inline-block;background:var(--accent);color:#fff;padding:4px 10px;border-radius:999px;font-size:.85rem}
+
+/* Responsive */
+@media (max-width:600px){
+  .container{margin:24px auto;padding:0 16px 32px}
+  h1{font-size:1.6rem}
+  .filme{padding:14px;flex-direction:column;align-items:center}
+  .poster{width:140px;height:200px;flex:0 0 auto}
+  .filme-body{text-align:center}
+}
+
+/* Accessibility focus styles */
+a,button,input,textarea{outline-color:color-mix(in srgb, var(--accent) 60%, transparent)}
+
+/* Print */
+@media print{
+  body{background: #fff;color:#000}
+  .filme{box-shadow:none;border:1px solid #eaeaea}
+}
