@@ -46,12 +46,13 @@ p{line-height:1.5;margin:.4rem 0}
 .filme h3{margin:.1rem 0 .5rem}
 .filme p strong{color:var(--accent)}
 
+.poster-wrap{position:relative;flex:0 0 140px}
 .poster{
-  width:120px;
-  height:170px;
+  width:140px;
+  height:200px;
   object-fit:cover;
   border-radius:8px;
-  flex:0 0 120px;
+  display:block;
   box-shadow:0 6px 18px rgba(0,0,0,0.06);
 }
 .filme-body{flex:1}
@@ -74,6 +75,25 @@ p{line-height:1.5;margin:.4rem 0}
 .poster{cursor:pointer}
 .poster:focus{outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent);outline-offset:3px}
 .review{margin-top:.6rem}
+
+/* Overlay shown on hover to indicate interactivity */
+.overlay{
+  position:absolute;inset:0;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.45) 100%);
+  color:#fff;font-weight:600;opacity:0;transition:opacity .18s ease,transform .18s ease;transform:translateY(6px);
+}
+.poster-wrap:hover .overlay,.poster:focus + .overlay,.filme.expanded .overlay{opacity:1;transform:translateY(0)}
+.overlay-label{padding:6px 10px;background:rgba(0,0,0,0.35);border-radius:6px}
+
+/* Toggle button */
+.toggle-btn{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 10px;border-radius:6px;font-size:.85rem;margin-left:10px;cursor:pointer}
+.toggle-btn[aria-expanded="true"]{background:var(--accent);color:#fff}
+
+/* Ensure poster-wrap and overlay adapt on small screens */
+@media (max-width:600px){
+  .poster-wrap{flex:0 0 auto}
+  .poster{width:160px;height:230px}
+}
 
 footer{margin-top:28px;font-size:.95rem;color:var(--muted);text-align:center}
 
