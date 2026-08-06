@@ -56,6 +56,25 @@ p{line-height:1.5;margin:.4rem 0}
 }
 .filme-body{flex:1}
 
+/* Hide meta and synopsis until poster is clicked */
+.meta,
+.synopsis{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition: max-height .28s ease, opacity .2s ease;
+}
+.synopsis h4{margin:.25rem 0 .35rem;color:var(--accent);font-size:1rem}
+.filme.expanded .meta,
+.filme.expanded .synopsis{
+  max-height:800px;
+  opacity:1;
+}
+
+.poster{cursor:pointer}
+.poster:focus{outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent);outline-offset:3px}
+.review{margin-top:.6rem}
+
 footer{margin-top:28px;font-size:.95rem;color:var(--muted);text-align:center}
 
 /* Utilities */
